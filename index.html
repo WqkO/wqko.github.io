@@ -66,26 +66,27 @@
     .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 204, 0, 0.3); }
     .cta-note { font-size: 0.85rem; color: #666; }
 
-    /* ---------- Stills côte à côte, spotlight au hover ---------- */
+    /* ---------- Stills côte à côte, spotlight doux ---------- */
     .hero-stills {
       display: flex; align-items: center; gap: 14px;
-      width: min(640px, 94vw); margin: 0 auto;
+      width: min(640px, 94vw);
+      aspect-ratio: 9 / 7;   /* hauteur FIXE : le bas de page ne bouge jamais */
+      margin: 0 auto;
     }
     .hero-stills img {
-      flex: 1 1 28%; min-width: 0; width: 0;
+      flex: 1 1 30%; min-width: 0; width: 0;
       aspect-ratio: 700 / 1521; height: auto;
       border-radius: 22px;
       box-shadow: 0 20px 56px rgba(0,0,0,0.55);
       transition: flex-basis 0.32s ease, transform 0.32s ease, box-shadow 0.32s ease;
     }
-    .hero-stills .s1 { flex-basis: 42%; }
+    .hero-stills .s1 { flex-basis: 36%; }
     .hero-stills img:hover {
-      flex-basis: 42%;
-      transform: translateY(-8px);
-      box-shadow: 0 30px 72px rgba(0,0,0,0.65);
+      flex-basis: 36%;
+      transform: translateY(-6px);
+      box-shadow: 0 28px 68px rgba(0,0,0,0.65);
     }
-    /* quand un autre still est survolé, le 1er redevient normal */
-    .hero-stills:has(img:hover) .s1:not(:hover) { flex-basis: 28%; }
+    .hero-stills:has(img:hover) .s1:not(:hover) { flex-basis: 30%; }
 
     /* ---------- Honest ---------- */
     .honest { max-width: 680px; margin: 0 auto; padding: 48px 24px 72px; text-align: center; }
