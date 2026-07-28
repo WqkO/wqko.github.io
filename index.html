@@ -32,10 +32,10 @@
 
     header {
       max-width: 680px; margin: 0 auto;
-      padding: 72px 24px 40px;
+      padding: 64px 24px 40px;
       display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
     }
-    .wordmark { height: 64px; }
+    .wordmark { height: clamp(88px, 20vw, 124px); width: auto; }
     h1 {
       font-size: clamp(2.1rem, 6vw, 3.2rem);
       font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
@@ -57,9 +57,12 @@
     .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 204, 0, 0.3); }
     .cta-note { font-size: 0.85rem; color: #666; }
 
-    .hero-shot { display: block; width: min(340px, 78vw); margin: 28px auto 0; }
+    .hero-shot { width: min(340px, 78vw); margin: 24px auto 0; }
     .hero-shot img, .gallery img {
-      width: 100%; border-radius: 28px;
+      width: 100%;
+      aspect-ratio: 700 / 1521;
+      background: #111;
+      border-radius: 28px;
       border: 1px solid rgba(255,255,255,0.08);
       display: block;
     }
@@ -67,18 +70,25 @@
     .gallery {
       display: flex; gap: 18px;
       overflow-x: auto; scroll-snap-type: x mandatory;
-      padding: 48px max(24px, calc(50vw - 500px)) 12px;
+      padding: 48px 24px 12px;
       scrollbar-width: none;
     }
     .gallery::-webkit-scrollbar { display: none; }
-    .gallery img { flex: 0 0 262px; scroll-snap-align: center; }
+    .gallery img {
+      flex: 0 0 262px; width: 262px;
+      scroll-snap-align: center;
+    }
+    /* centre la galerie quand elle tient dans l'écran, scrolle sinon */
+    .gallery img:first-child { margin-left: auto; }
+    .gallery img:last-child { margin-right: auto; }
     .swipe-hint { text-align: center; font-size: 0.8rem; color: #555; padding-bottom: 8px; }
+    @media (min-width: 1200px) { .swipe-hint { display: none; } }
 
     .honest { max-width: 680px; margin: 0 auto; padding: 72px 24px; text-align: center; }
     .honest h2 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 28px; }
     .honest h2 span { color: #FFCC00; }
     .honest ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .honest li { font-size: 1.2rem; font-weight: 600; color: #e8e8e8; }
+    .honest li { font-size: 1.2rem; font-weight: 600; color: #e8e8e8; line-height: 1.35; }
     .honest li::before { content: "— "; color: #FF6B35; font-weight: 800; }
     .honest .fineprint { margin-top: 26px; font-size: 0.9rem; color: #777; line-height: 1.6; }
 
@@ -89,7 +99,7 @@
     }
     footer a { color: #888; text-decoration: none; }
     footer a:hover { color: #ccc; }
-    footer .foot-icon { width: 40px; border-radius: 10px; display: block; margin: 0 auto 10px; opacity: 0.9; }
+    footer .foot-icon { width: 40px; height: 40px; border-radius: 10px; display: block; margin: 0 auto 10px; opacity: 0.9; }
   </style>
 </head>
 <body>
@@ -120,7 +130,7 @@
       <li>No account</li>
       <li>No watermark</li>
       <li>Works fully offline</li>
-      <li>Your media never leave your device</li>
+      <li>Your media never leave<br>your device</li>
     </ul>
     <p class="fineprint">Everything is rendered on your iPhone. Nothing is uploaded, ever.</p>
   </section>
