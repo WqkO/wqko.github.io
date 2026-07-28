@@ -29,8 +29,8 @@
 
     /* ---------- HERO ---------- */
     .hero {
-      max-width: 1140px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.1fr;
       align-items: center; gap: 56px;
       padding: 72px 32px 40px;
     }
@@ -66,25 +66,26 @@
     .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 204, 0, 0.3); }
     .cta-note { font-size: 0.85rem; color: #666; }
 
+    /* ---------- Stills côte à côte, spotlight au hover ---------- */
     .hero-stills {
-      position: relative;
-      width: min(540px, 92vw);
-      aspect-ratio: 0.82;
-      margin: 0 auto;
+      display: flex; align-items: center; gap: 14px;
+      width: min(640px, 94vw); margin: 0 auto;
     }
     .hero-stills img {
-      position: absolute;
-      aspect-ratio: 700 / 1521;
-      border-radius: 26px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.55);
-      transition: transform 0.25s ease;
+      flex: 1 1 28%; min-width: 0; width: 0;
+      aspect-ratio: 700 / 1521; height: auto;
+      border-radius: 22px;
+      box-shadow: 0 20px 56px rgba(0,0,0,0.55);
+      transition: flex-basis 0.32s ease, transform 0.32s ease, box-shadow 0.32s ease;
     }
-    .s-front { width: 50%; left: 25%; top: 3%;  z-index: 3; }
-    .s-left  { width: 44%; left: 0;   top: 13%; transform: rotate(-7deg); z-index: 2; }
-    .s-right { width: 44%; right: 0;  top: 17%; transform: rotate(7deg);  z-index: 1; }
-    .s-front:hover { transform: translateY(-10px) scale(1.02); }
-    .s-left:hover  { transform: rotate(-7deg) translateY(-10px) scale(1.02); }
-    .s-right:hover { transform: rotate(7deg) translateY(-10px) scale(1.02); }
+    .hero-stills .s1 { flex-basis: 42%; }
+    .hero-stills img:hover {
+      flex-basis: 42%;
+      transform: translateY(-8px);
+      box-shadow: 0 30px 72px rgba(0,0,0,0.65);
+    }
+    /* quand un autre still est survolé, le 1er redevient normal */
+    .hero-stills:has(img:hover) .s1:not(:hover) { flex-basis: 28%; }
 
     /* ---------- Honest ---------- */
     .honest { max-width: 680px; margin: 0 auto; padding: 48px 24px 72px; text-align: center; }
@@ -96,8 +97,7 @@
     .honest .fineprint { margin-top: 26px; font-size: 0.9rem; color: #777; line-height: 1.6; }
 
     footer {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 36px 24px 48px; text-align: center;
+      padding: 24px 24px 48px; text-align: center;
       font-size: 0.82rem; color: #555; line-height: 2.1;
     }
     footer a { color: #888; text-decoration: none; }
@@ -112,7 +112,7 @@
       }
       .hero-copy { align-items: center; text-align: center; }
       .brand { flex-direction: column; gap: 14px; }
-      .hero-stills { width: min(420px, 94vw); }
+      .hero-stills { width: 94vw; gap: 10px; }
       .honest { padding-top: 40px; }
     }
   </style>
@@ -130,9 +130,9 @@
       <span class="cta-note">Free download · 7-day free trial · iPhone</span>
     </div>
     <div class="hero-stills">
-      <img class="s-left"  src="img/still-freestyle.webp" alt="Grid or freestyle layouts">
-      <img class="s-front" src="img/still-hero.webp" alt="Photos and videos playing together in one grid">
-      <img class="s-right" src="img/still-clips.webp" alt="Trim, loop and speed every clip">
+      <img class="s1" src="img/still-hero.webp" alt="Photos and videos playing together in one grid">
+      <img src="img/still-freestyle.webp" alt="Grid or freestyle layouts">
+      <img src="img/still-clips.webp" alt="Trim, loop and speed every clip">
     </div>
   </div>
 
