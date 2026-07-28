@@ -16,33 +16,35 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      background: #0A0A0A;
       color: #fff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      background:
+        radial-gradient(900px 620px at 78% 6%, rgba(255,107,53,0.15), transparent 65%),
+        radial-gradient(700px 520px at 6% 32%, rgba(255,204,0,0.06), transparent 65%),
+        radial-gradient(950px 700px at 50% 100%, rgba(168,85,247,0.08), transparent 65%),
+        #0A0A0A;
     }
-    .glow {
-      position: fixed; inset: -20% -20% auto;
-      height: 70vh;
-      background: radial-gradient(ellipse at 30% 0%, rgba(255,107,53,0.12), rgba(255,204,0,0.04) 45%, transparent 70%);
-      pointer-events: none; z-index: 0;
-    }
-    .hero, section, footer { position: relative; z-index: 1; }
 
-    /* ---------- HERO : copy à gauche, éventail de stills à droite ---------- */
+    /* ---------- HERO ---------- */
     .hero {
       max-width: 1140px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       align-items: center; gap: 56px;
-      padding: 88px 32px 64px;
-      min-height: 88vh;
+      padding: 72px 32px 40px;
     }
     .hero-copy {
       display: flex; flex-direction: column;
       align-items: flex-start; text-align: left; gap: 24px;
     }
-    .wordmark { height: clamp(72px, 9vw, 108px); width: auto; margin-left: -6px; }
+    .brand { display: flex; align-items: center; gap: 20px; }
+    .app-icon {
+      width: clamp(64px, 7vw, 84px); height: clamp(64px, 7vw, 84px);
+      border-radius: 22.5%;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+    }
+    .wordmark { height: clamp(52px, 6vw, 76px); width: auto; }
     h1 {
       font-size: clamp(2.2rem, 4.2vw, 3.4rem);
       font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
@@ -70,32 +72,22 @@
       aspect-ratio: 0.82;
       margin: 0 auto;
     }
-    .hero-stills::before {
-      content: "";
-      position: absolute; inset: -12%;
-      background: radial-gradient(circle at 50% 42%, rgba(255,107,53,0.20), rgba(255,204,0,0.06) 45%, transparent 68%);
-      z-index: 0;
-    }
     .hero-stills img {
       position: absolute;
       aspect-ratio: 700 / 1521;
-      background: #111;
       border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.09);
       box-shadow: 0 24px 64px rgba(0,0,0,0.55);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease;
     }
-    .hero-stills img:hover {
-      transform: rotate(0deg) scale(1.04);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.65);
-      z-index: 4;
-    }
-    .s-front  { width: 50%; left: 25%; top: 3%;  z-index: 3; }
-    .s-left   { width: 44%; left: 0;   top: 13%; transform: rotate(-7deg); z-index: 2; }
-    .s-right  { width: 44%; right: 0;  top: 17%; transform: rotate(7deg);  z-index: 1; }
+    .s-front { width: 50%; left: 25%; top: 3%;  z-index: 3; }
+    .s-left  { width: 44%; left: 0;   top: 13%; transform: rotate(-7deg); z-index: 2; }
+    .s-right { width: 44%; right: 0;  top: 17%; transform: rotate(7deg);  z-index: 1; }
+    .s-front:hover { transform: translateY(-10px) scale(1.02); }
+    .s-left:hover  { transform: rotate(-7deg) translateY(-10px) scale(1.02); }
+    .s-right:hover { transform: rotate(7deg) translateY(-10px) scale(1.02); }
 
     /* ---------- Honest ---------- */
-    .honest { max-width: 680px; margin: 0 auto; padding: 88px 24px; text-align: center; }
+    .honest { max-width: 680px; margin: 0 auto; padding: 48px 24px 72px; text-align: center; }
     .honest h2 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 28px; }
     .honest h2 span { color: #FFCC00; }
     .honest ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
@@ -112,24 +104,26 @@
     footer a:hover { color: #ccc; }
     footer .foot-icon { width: 40px; height: 40px; border-radius: 10px; display: block; margin: 0 auto 10px; opacity: 0.9; }
 
-    /* ---------- Mobile : tout se ré-empile ---------- */
+    /* ---------- Mobile ---------- */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 48px; padding: 56px 24px 48px; min-height: 0;
+        gap: 44px; padding: 48px 24px 24px;
       }
       .hero-copy { align-items: center; text-align: center; }
-      .wordmark { margin-left: 0; height: clamp(80px, 18vw, 104px); }
+      .brand { flex-direction: column; gap: 14px; }
       .hero-stills { width: min(420px, 94vw); }
+      .honest { padding-top: 40px; }
     }
   </style>
 </head>
 <body>
-  <div class="glow"></div>
-
   <div class="hero">
     <div class="hero-copy">
-      <img class="wordmark" src="img/wordmark.png" alt="Collaj">
+      <div class="brand">
+        <img class="app-icon" src="img/icon.png" alt="">
+        <img class="wordmark" src="img/wordmark.png" alt="Collaj">
+      </div>
       <h1>Photos + videos.<br><em>One collage.</em></h1>
       <p class="sub">The collage app where your clips actually play — grid or freestyle, trim &amp; loop every clip, export photo, video or GIF up to 4K.</p>
       <a class="cta" href="https://apps.apple.com/app/id6762120242">&#63743; Download on the App Store</a>
