@@ -4,61 +4,129 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Collaj — Photo & Video Collage</title>
-  <meta name="description" content="Multi videos, grid & freestyle. No account. No watermark. Your photos never leave your device.">
+  <meta name="description" content="The collage app where your clips actually play. Grid & freestyle, export up to 4K. No account. No watermark.">
   <meta name="apple-itunes-app" content="app-id=6762120242">
   <meta property="og:title" content="Collaj — Photo & Video Collage">
-  <meta property="og:description" content="Videos playing inside your collages. Grid & freestyle. No account. No watermark.">
+  <meta property="og:description" content="Videos playing inside your collages. Grid & freestyle, up to 4K. No account. No watermark.">
+  <meta property="og:image" content="https://wqko.github.io/img/still-hero.png">
   <meta property="og:url" content="https://wqko.github.io/">
+  <link rel="icon" href="img/icon.png">
+  <link rel="apple-touch-icon" href="img/icon.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       background: #0A0A0A;
       color: #fff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 32px 24px;
-      gap: 20px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .logo { width: 96px; height: 96px; }
-    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-    h1 span {
-      background: linear-gradient(135deg, #FF6B35, #FFCC00);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .glow {
+      position: fixed; inset: -20% -20% auto;
+      height: 70vh;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.14), rgba(255,204,0,0.05) 45%, transparent 70%);
+      pointer-events: none; z-index: 0;
     }
-    .tagline { font-size: 1.15rem; color: #d0d0d0; max-width: 26em; line-height: 1.5; }
-    .promise { font-size: 0.95rem; color: #8a8a8a; max-width: 30em; line-height: 1.5; }
+    section, header, footer { position: relative; z-index: 1; }
+
+    header {
+      max-width: 680px; margin: 0 auto;
+      padding: 72px 24px 40px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
+    }
+    .wordmark { height: 64px; }
+    h1 {
+      font-size: clamp(2.1rem, 6vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, #FF6B35, #FFCC00);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .sub { font-size: 1.15rem; color: #b5b5b5; line-height: 1.55; max-width: 30em; }
     .cta {
-      display: inline-block;
-      margin-top: 8px;
-      background: #FFCC00;
-      color: #0A0A0A;
-      font-size: 1.05rem;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 15px 32px;
-      border-radius: 14px;
+      display: inline-block; margin-top: 6px;
+      background: #FFCC00; color: #0A0A0A;
+      font-size: 1.08rem; font-weight: 700; text-decoration: none;
+      padding: 16px 36px; border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(255, 204, 0, 0.18);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .cta:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255, 204, 0, 0.25); }
-    footer { margin-top: 40px; font-size: 0.8rem; color: #555; line-height: 2; }
-    footer a { color: #777; text-decoration: none; }
-    footer a:hover { color: #aaa; }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 204, 0, 0.3); }
+    .cta-note { font-size: 0.85rem; color: #666; }
+
+    .hero-shot { display: block; width: min(340px, 78vw); margin: 28px auto 0; }
+    .hero-shot img, .gallery img {
+      width: 100%; border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .gallery {
+      display: flex; gap: 18px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      padding: 48px max(24px, calc(50vw - 500px)) 12px;
+      scrollbar-width: none;
+    }
+    .gallery::-webkit-scrollbar { display: none; }
+    .gallery img { flex: 0 0 262px; scroll-snap-align: center; }
+    .swipe-hint { text-align: center; font-size: 0.8rem; color: #555; padding-bottom: 8px; }
+
+    .honest { max-width: 680px; margin: 0 auto; padding: 72px 24px; text-align: center; }
+    .honest h2 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .honest h2 span { color: #FFCC00; }
+    .honest ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .honest li { font-size: 1.2rem; font-weight: 600; color: #e8e8e8; }
+    .honest li::before { content: "— "; color: #FF6B35; font-weight: 800; }
+    .honest .fineprint { margin-top: 26px; font-size: 0.9rem; color: #777; line-height: 1.6; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 36px 24px 48px; text-align: center;
+      font-size: 0.82rem; color: #555; line-height: 2.1;
+    }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: #ccc; }
+    footer .foot-icon { width: 40px; border-radius: 10px; display: block; margin: 0 auto 10px; opacity: 0.9; }
   </style>
 </head>
 <body>
-  <img class="logo" src="icon.png" alt="">
-  <h1><span>Collaj</span> — Photo &amp; Video Collage</h1>
-  <p class="tagline">Videos playing inside your collages.<br>Multi videos, grid &amp; freestyle.</p>
-  <p class="promise">No account. No watermark. Your photos never leave your device.</p>
-  <a class="cta" href="https://apps.apple.com/app/id6762120242">&#63743; Download on the App Store</a>
+  <div class="glow"></div>
+
+  <header>
+    <img class="wordmark" src="img/wordmark.png" alt="Collaj">
+    <h1>Photos + videos.<br><em>One collage.</em></h1>
+    <p class="sub">The collage app where your clips actually play — grid or freestyle, trim &amp; loop every clip, export photo, video or GIF up to 4K.</p>
+    <a class="cta" href="https://apps.apple.com/app/id6762120242">&#63743; Download on the App Store</a>
+    <span class="cta-note">Free download · 7-day free trial · iPhone</span>
+    <div class="hero-shot"><img src="img/still-hero.png" alt="Collaj editor: photos and videos playing together in one grid"></div>
+  </header>
+
+  <section>
+    <div class="gallery">
+      <img src="img/still-freestyle.png" loading="lazy" alt="Grid or freestyle layouts">
+      <img src="img/still-clips.png" loading="lazy" alt="Trim, loop and speed every clip">
+      <img src="img/still-export.png" loading="lazy" alt="Export photo, video or GIF up to 4K">
+      <img src="img/still-style.png" loading="lazy" alt="Text, filters and frames">
+    </div>
+    <p class="swipe-hint">Swipe →</p>
+  </section>
+
+  <section class="honest">
+    <h2>Honest <span>by design.</span></h2>
+    <ul>
+      <li>No account</li>
+      <li>No watermark</li>
+      <li>Works fully offline</li>
+      <li>Your media never leave your device</li>
+    </ul>
+    <p class="fineprint">Everything is rendered on your iPhone. Nothing is uploaded, ever.</p>
+  </section>
+
   <footer>
+    <img class="foot-icon" src="img/icon.png" alt="">
     <a href="https://wqko.github.io/collaj-legal/privacy.html">Privacy Policy</a> ·
     <a href="mailto:collaj.app@proton.me">collaj.app@proton.me</a><br>
     © 2026 Collaj
