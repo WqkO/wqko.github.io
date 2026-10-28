@@ -97,6 +97,18 @@
     .honest li::before { content: "— "; color: #FF6B35; font-weight: 800; }
     .honest .fineprint { margin-top: 26px; font-size: 0.9rem; color: #777; line-height: 1.6; }
 
+    /* ---------- FAQ ---------- */
+    .faq { max-width: 680px; margin: 0 auto; padding: 0 24px 64px; }
+    .faq h2 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; text-align: center; }
+    .faq h2 span { color: #FFCC00; }
+    .faq .qa { padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .faq .qa:last-child { border-bottom: none; }
+    .faq h3 { font-size: 1.12rem; font-weight: 700; color: #e8e8e8; line-height: 1.35; margin-bottom: 8px; }
+    .faq p { font-size: 1rem; color: #b5b5b5; line-height: 1.6; }
+    .faq p + p { margin-top: 8px; }
+    .faq a { color: #FFCC00; text-decoration: none; }
+    .faq a:hover { text-decoration: underline; }
+
     footer {
       padding: 24px 24px 48px; text-align: center;
       font-size: 0.82rem; color: #555; line-height: 2.1;
@@ -106,14 +118,15 @@
     footer .foot-icon { width: 40px; height: 40px; border-radius: 10px; display: block; margin: 0 auto 10px; opacity: 0.9; }
 
     /* ---------- Mobile ---------- */
-    @media (max-width: 900px) {
+    @media (max-width: 940px) {
       .hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 44px; padding: 48px 24px 24px;
       }
       .hero-copy { align-items: center; text-align: center; }
       .brand { flex-direction: column; gap: 14px; }
-      .hero-stills { width: 94vw; gap: 10px; }
+      /* Wider than the padded column: centred on it, so it overflows evenly and never past the screen. */
+      .hero-stills { width: 94vw; gap: 10px; margin: 0 0 0 calc(50% - 47vw); }
       .honest { padding-top: 40px; }
     }
   </style>
@@ -142,10 +155,55 @@
     <ul>
       <li>No account</li>
       <li>No watermark</li>
-      <li>Works fully offline</li>
       <li>Your media never leave<br>your device</li>
     </ul>
-    <p class="fineprint">Everything is rendered on your iPhone. Nothing is uploaded, ever.</p>
+    <p class="fineprint">Everything is rendered on your iPhone. Your photos and videos are never uploaded.</p>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Questions <span>&amp; answers.</span></h2>
+
+    <div class="qa">
+      <h3>What is Collaj?</h3>
+      <p>Collaj is an iPhone app for collages that mix photos and videos. Pick a grid or place things freely, trim, loop and change the speed of each video clip, then export a photo, an MP4 video or a GIF, up to 4K.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Can I put photos and videos in the same collage?</h3>
+      <p>Yes, that&rsquo;s what Collaj is for. Each video plays in its own cell, with its own trim, loop and speed.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Is Collaj free?</h3>
+      <p>Free to start. Photo collages are free, with no ads. Your first video export is free; after that, each video export costs a short ad, or you go Premium.</p>
+      <p>Premium removes the ads and adds several videos in one collage (your first one is on us, once), 4K and 60&nbsp;fps export and the full creative library. It&rsquo;s a weekly, monthly or yearly subscription (the yearly plan includes a free trial), or a one-time lifetime purchase.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Is there a watermark?</h3>
+      <p>No. Not on photos, videos or GIFs.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Do I need an account? Where do my photos go?</h3>
+      <p>No account, no sign-up. Collages are made and exported on your iPhone. Your photos and videos are never uploaded.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Does it work without internet?</h3>
+      <p>Making and exporting collages happens on the iPhone. Ads, purchases, restoring Premium and photos or videos stored only in iCloud need a connection.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Which languages?</h3>
+      <p>English and French, plus Spanish, Brazilian Portuguese, Russian, German and Japanese in beta. Collaj follows your iPhone&rsquo;s language, and you can pick another one in its settings.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Who makes Collaj?</h3>
+      <p>Collaj is made by Arnaud Desne, a solo developer. App Store ID 6762120242. It is not related to &ldquo;Collaj App&rdquo; (now called Jodu) or to the website collaj.app.</p>
+      <p>Contact: <a href="mailto:collaj.app@proton.me">collaj.app@proton.me</a></p>
+    </div>
   </section>
 
   <footer>
